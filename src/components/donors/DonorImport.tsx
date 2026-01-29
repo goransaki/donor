@@ -384,37 +384,37 @@ export default function DonorImport({ cities, userRole, userCityId }: DonorImpor
       )}
 
       {/* Import results */}
-      {importResult && (
+      {importResult && importResult.details && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <h3 className="font-medium text-gray-900 mb-4">Резултат импорта</h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
             <div className="bg-green-50 rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-green-600">{importResult.imported}</div>
+              <div className="text-2xl font-bold text-green-600">{importResult.details.imported}</div>
               <div className="text-sm text-gray-600">Успешно увезено</div>
             </div>
             <div className="bg-red-50 rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-red-600">{importResult.failed}</div>
+              <div className="text-2xl font-bold text-red-600">{importResult.details.failed}</div>
               <div className="text-sm text-gray-600">Неуспешно</div>
             </div>
             <div className="bg-yellow-50 rounded-lg p-4 text-center">
-              <div className="text-2xl font-bold text-yellow-600">{importResult.skipped}</div>
+              <div className="text-2xl font-bold text-yellow-600">{importResult.details.skipped}</div>
               <div className="text-sm text-gray-600">Прескочено</div>
             </div>
           </div>
 
-          {importResult.imported > 0 && (
+          {importResult.details.imported > 0 && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-green-700 text-center">
-              Успешно увезено {importResult.imported} донора! Преусмеравам на листу донора...
+              Успешно увезено {importResult.details.imported} донора! Преусмеравам на листу донора...
             </div>
           )}
 
-          {importResult.errors.length > 0 && (
+          {importResult.details.errors.length > 0 && (
             <div className="mt-4">
               <h4 className="font-medium text-red-700 mb-2">Грешке при импорту:</h4>
               <div className="max-h-48 overflow-y-auto border border-red-200 rounded-lg p-4 bg-red-50">
                 <ul className="list-disc list-inside text-sm text-red-600">
-                  {importResult.errors.map((err, idx) => (
+                  {importResult.details.errors.map((err, idx) => (
                     <li key={idx}>Ред {err.row}: {err.message}</li>
                   ))}
                 </ul>
